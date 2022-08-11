@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import RendererAgg
+_lock = RendererAgg.lock
 
 st.title('Data Summary')
 
@@ -27,6 +29,7 @@ def plot_hist(data, title):
     return st.pyplot(fig)
 cols = list(penguins.columns)
 cols.remove('species')
-for col in cols:
-    plot_hist(penguins[col], title=f'Distribution of {col}')
+with _lock:
+    for col in cols:
+        plot_hist(penguins[col], title=f'Distribution of {col}')
 
