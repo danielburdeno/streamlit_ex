@@ -37,7 +37,7 @@ expander_df = st.expander('Show new penguin stats')
 expander_df.table(predict_in.loc[0])
 predict_button = st.button('Predict the Species!')
 if predict_button:
-    if float(predict_in['bill_length_mm'][0]) == 0.0:
+    if float(predict_in['bill_length_mm'][0]) == 0.0 or float(predict_in['bill_depth_mm'][0]) == 0.0 or float(predict_in['flipper_length_mm'][0]) == 0.0 or float(predict_in['body_mass_g'][0]) == 0.0:
         st.write('These are not valid stats for prediction')
     else:
         prediction = penguin_model.predict(new_input)

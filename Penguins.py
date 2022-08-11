@@ -1,3 +1,4 @@
+from curses import use_default_colors
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -12,14 +13,20 @@ if side_button:
     st.write('Sidebar pressed')
 
 # Header
-st.image('Images/penguins.jpg')
+st.image('Images/penguins.jpg', use_column_width='always')
 st.title('Streamlit with Penguins')
 st.header('This is a header')
-st.subheader('This is a subheader')
-st.write('Standard st.write')
+col11, col12 = st.columns(2)
+col11.subheader('This is a subheader column 1')
+col12.subheader('This is a subheader column 2')
+col21, col22, col23 = st.columns([3,2,1])
+col21.write('Wider column 1: Testing 1 2 3, text will wrap around if it needs too')
+col22.write('Medium column 2: Mic Check, can you read me')
+col23.write('Small column 3: Success')
 st.markdown('Markdown **syntax** *works*')
 'Markdown'
 '# Magic'
+st.write('<h2 style="text-align:center">Text aligned with HTML</h2', unsafe_allow_html=True)
 st.header('Widget Functionality')
 
 button1 = st.button('This is a button')
